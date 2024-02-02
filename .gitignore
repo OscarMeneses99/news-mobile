@@ -36,3 +36,11 @@ yarn-error.*
 
 # env
 .env
+
+# ios
+ios
+
+# android
+android
+
+.idea
