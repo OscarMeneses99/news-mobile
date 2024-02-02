@@ -1,23 +1,43 @@
-import * as React from "react";
-import { View, Text } from "react-native";
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-function Home() {
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Home</Text>
-    </View>
-  );
-}
+import Home from "./src/screens/Home";
+import Details from "./src/screens/Details";
 
-function Details() {
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Details</Text>
-    </View>
-  );
-}
+const options = {
+  home: {
+    title: "News Mobile 🌎",
+    headerStyle: {
+      backgroundColor: "#202020",
+    },
+    headerTintColor: "#fff",
+    headerTitleStyle: {
+      fontWeight: "bold",
+      fontSize: 20,
+      color: "#fff",
+    },
+    contentStyle: {
+      backgroundColor: "#fff",
+    },
+  },
+  details: {
+    title: "Detalles",
+    headerBackTitle: "Atrás",
+    headerStyle: {
+      backgroundColor: "#202020",
+    },
+    headerTintColor: "#fff",
+    headerTitleStyle: {
+      fontWeight: "bold",
+      fontSize: 20,
+      color: "#fff",
+    },
+    contentStyle: {
+      backgroundColor: "#fff",
+    },
+  },
+};
 
 const Stack = createNativeStackNavigator();
 
@@ -28,10 +48,12 @@ function App() {
         <Stack.Screen
           name="Home"
           component={Home}
+          options={options.home}
         />
         <Stack.Screen
           name="Details"
           component={Details}
+          options={options.details}
         />
       </Stack.Navigator>
     </NavigationContainer>
