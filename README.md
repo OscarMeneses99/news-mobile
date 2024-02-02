@@ -296,6 +296,6 @@ Por ultimo presentamos la siguiente información de la siguiente forma:
 Expo nos permite hacer una pre-Build de nuestra app para ios/android ejecute el siguiente comando:
 
 ```bash
-
+npx expo prebuild
 ```
 
