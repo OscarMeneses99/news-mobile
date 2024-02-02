@@ -1,6 +1,6 @@
 # Documentación
 
-Para esta prueba decidi hacerla en el entorno de desarrollo de expo ya que simplifica el desarrollo de aplicaciones móviles con React Native.
+Para esta prueba decidí hacerla en el entorno de desarrollo de Expo, ya que simplifica el desarrollo de aplicaciones móviles con React Native.
 
 ## Creación del proyecto
 
@@ -10,7 +10,7 @@ Ejecute el siguiente comando en su terminal:
 npx create-expo-app
 ```
 
-Segun las instrucciones, se debera llamar al proyecto <strong>news-mobile</strong>
+Según las instrucciones, el proyecto deberá llamarse "news-mobile".
 
 ## Ejecutar app
 
@@ -20,27 +20,27 @@ Ejecute el siguiente comando en su terminal:
 npx expo start
 ```
 
-Para poder visualizar los cambios en tiempo real de nuestra aplicación es recomendable descargar en su tienda de aplicaciones PlayStore/AppStore la aplicación llamada Expo Go
+Para poder visualizar los cambios en tiempo real de nuestra aplicación, es recomendable descargar en su tienda de aplicaciones (Play Store/App Store) la aplicación llamada Expo Go.
 
-Abra su camara y capture el codigo QR que aparece en la terminal cuando el proyecto este ejecutandose.
+Abra su cámara y capture el código QR que aparece en la terminal cuando el proyecto esté ejecutándose.
 
 ## Añadir un Router a la aplicación
 
-Utilizaremos React Navigation, para mas información visite la documentación: https://reactnavigation.org/docs/getting-started/
+Utilizaremos React Navigation. Para obtener más información, visite la documentación en: https://reactnavigation.org/docs/getting-started/
 
-Se necesitaran las siguientes dependencias:
+Se necesitarán las siguientes dependencias:
 
 ```bash
 npm install @react-navigation/native
 ```
 
-En nuestro caso como estaremos utilizando expo, necesitamos instalar las siguientes dependencias complementarias de la siguiente forma:
+En nuestro caso, como estaremos utilizando Expo, necesitamos instalar las siguientes dependencias complementarias de la siguiente forma:
 
 ```bash
 npx expo install react-native-screens react-native-safe-area-context
 ```
 
-En el punto de entrada de nuestra aplicación que es <strong>App.js</strong> usaremos el <strong>NavigationContainer</strong>
+En el punto de entrada de nuestra aplicación, que es App.js, usaremos el NavigationContainer:
 
 ```react
 import * as React from 'react';
@@ -53,9 +53,9 @@ export default function App() {
 }
 ```
 
-De esta forma envolvemos toda nuestra aplicación.
+De esta forma, envolvemos toda nuestra aplicación.
 
-Por ultimo necesitamos otra dependencia que nos ayudara en el router de nuestra app que es la siguiente:
+Por último, necesitamos otra dependencia que nos ayudará en el router de nuestra aplicación, que es la siguiente:
 
 ```bash
 npm install @react-navigation/native-stack
@@ -67,7 +67,7 @@ Podemos declarar una constante:
 const Stack = createNativeStackNavigator();
 ```
 
-Esto devuelve 2 objetos que son el Navigation y Screen, con ellos podemos declarar las rutas de nuestra app y el componente a renderizar de la siguiente forma:
+Esto devuelve 2 objetos que son el Navigation y Screen, con ellos podemos declarar las rutas de nuestra aplicación y el componente a renderizar de la siguiente forma:
 
 ```code
 const Stack = createNativeStackNavigator();
@@ -92,11 +92,11 @@ function App() {
 
 ## Obtener token de la API
 
-Cree una cuenta en https://newsapi.org/ el cual le otorgara un token para poder usar el servicio.
+Cree una cuenta en https://newsapi.org/ el cual le otorgará un token para poder usar el servicio.
 
-Por motivos de seguridad y buenas practicas comience guardando este token en una variable de entorno.
+Por motivos de seguridad y buenas prácticas, comience guardando este token en una variable de entorno.
 
-En la ruta raiz del proyecto cree un archivo <strong>.env</strong> y guarde el token de la siguiente forma:
+En la ruta raíz del proyecto, cree un archivo .env y guarde el token de la siguiente forma:
 
 ```code
 NEWS_API_KEY=your_api_key
@@ -104,15 +104,15 @@ NEWS_API_KEY=your_api_key
 
 ## Variables de entorno
 
-Para acceder a las variables de entorno se debera instalar dotenv y expo-constants de la siguiente forma:
+Para acceder a las variables de entorno, se deberá instalar dotenv y expo-constants de la siguiente forma:
 
 ```bash
 npm install dotenv expo-constants
 ```
 
-Cree un archivo en la raiz del proyecto llamado <strong>app.config.js</strong>
+Cree un archivo en la raíz del proyecto llamado app.config.js.
 
-Dentro debera incluir esta configuración:
+Dentro deberá incluir esta configuración:
 
 ```code
 import "dotenv/config";
@@ -125,13 +125,13 @@ export default ({ config }) => ({
 });
 ```
 
-Por ultimo asegurese de agregar el .env en el archivo .gitignore para no subir el token a algun repositorio de github.
+Por último, asegúrese de agregar el .env en el archivo .gitignore para no subir el token a algún repositorio de GitHub.
 
 ## Consumo de la API
 
-Cree una carpeta llamada <strong>services</strong> con el archivo <strong>api.js</strong>
+Cree una carpeta llamada services con el archivo api.js
 
-En la siguiente funcion hacemos una llamada a una url con el token para obtener las noticias:
+En la siguiente función hacemos una llamada a una URL con el token para obtener las noticias:
 
 ```code
 import Constants from "expo-constants";
@@ -149,7 +149,7 @@ export async function getNews() {
 
 Cree un archivo Card.jsx en la carpeta components.
 
-Esta recibira como props los <strong>articles</strong> de todas las noticias, la cual debera renderizar:
+Este recibirá como props los articles de todas las noticias, la cual deberá renderizar:
 
 <ul>
   <li>Image</li>
@@ -158,7 +158,7 @@ Esta recibira como props los <strong>articles</strong> de todas las noticias, la
   <li>Button</li>
 </ul>
 
-La construccion del componente es la siguiente:
+La construcción del componente es la siguiente:
 
 ```code
 function Card({ article, navigation }) {
@@ -187,13 +187,13 @@ function Card({ article, navigation }) {
 }
 ```
 
-En el json hay algunos articulos que no contienen imagen, para esto hice una ternaria para que en el caso de que la imagen tenga un valor null, en cambio ponga una imagen descargada de internet con una leyenda que dice <strong>no photo</strong>
+En el JSON hay algunos artículos que no contienen imagen. Para esto, hice una ternaria para que en el caso de que la imagen tenga un valor null ponga una imagen que dice "no photo".
 
-Tambien recibe esta Card el objeto navigation para poder ir a la pantalla de Detalles, y a su vez le mandamos el objeto article.
+También recibe esta Card el objeto navigation para poder ir a la pantalla de Detalles, y a su vez le mandamos el objeto article.
 
-## Renderizar una Lista de Articulos
+## Renderizar una Lista de Artículos
 
-Primero obtenemos la lista de articulos desde la API de la siguiente manera.
+Primero obtenemos la lista de artículos desde la API de la siguiente manera.
 
 ```code
   const [data, setData] = useState({});
@@ -206,7 +206,7 @@ Primero obtenemos la lista de articulos desde la API de la siguiente manera.
   const { articles } = data;
 ```
 
-Para que el rendimiento de la aplicación sea bueno, se usara FlatList ya que nos permite renderizar una lista con scroll.
+Para que el rendimiento de la aplicación sea bueno, se usará FlatList ya que nos permite renderizar una lista con scroll.
 
 Queda de la siguiente manera:
 
@@ -236,7 +236,7 @@ Donde renderItem es cada una de las Cards
 
 ### Pantalla de detalles
 
-Por ultimo en la pantalla de detalles nos hace falta presentar:
+Por último, en la pantalla de detalles nos hace falta presentar la siguiente información:
 
 <ul>
   <li>Image</li>
@@ -247,7 +247,7 @@ Por ultimo en la pantalla de detalles nos hace falta presentar:
   <li>Link</li>
 </ul>
 
-En la response de la api, la propiedad content no presenta toda la información en texto, por lo que se le agregara un link que lleve a la web para poder visualizar la noticia completa.
+En la respuesta de la API, la propiedad content no presenta toda la información en texto, por lo que se le agregará un enlace que lleve a la web para poder visualizar la noticia completa.
 
 Recuerde que recibimos como prop en la ruta de detalles el objeto article por lo tanto podemos recuperarlo de la siguiente manera:
 
@@ -257,7 +257,7 @@ const Details = ({ route }) => {
 }
 ```
 
-En esta parte cree una función que nos permita abrir la url en el navegador del dispositivo para visitar fuente de la noticia.
+En esta parte cree una función que nos permita abrir la URL en el navegador del dispositivo para visitar la fuente de la noticia.
 
 ```code
   const openUrl = () => {
@@ -271,7 +271,7 @@ Se puede dar formato a la fecha de publicación de la siguiente forma:
 const formatedDate = new Date(publishedAt).toLocaleDateString();
 ```
 
-Por ultimo presentamos la siguiente información de la siguiente forma:
+Por último, presentamos la siguiente información de la siguiente forma:
 
 ```code
     <View style={styles.conteiner}>
@@ -293,9 +293,8 @@ Por ultimo presentamos la siguiente información de la siguiente forma:
 
 ### pre-Build
 
-Expo nos permite hacer una pre-Build de nuestra app para ios/android ejecute el siguiente comando:
+Expo nos permite hacer una pre-Build de nuestra app para iOS/Android. Ejecute el siguiente comando:
 
 ```bash
 npx expo prebuild
 ```
-
