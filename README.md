@@ -40,6 +40,7 @@ export default function App() {
   );
 }
 ```
+
 De esta forma envolvemos toda nuestra aplicación.
 
 Por ultimo necesitamos otra dependencia que nos ayudara en el router de nuestra app que es la siguiente:
@@ -132,5 +133,47 @@ export async function getNews() {
 }
 ```
 
+## Componente Card
 
+Cree un archivo Card.jsx en la carpeta components.
 
+Esta recibira como props los <strong>articles</strong> de todas las noticias, la cual debera renderizar:
+<ul>
+  <li>Image</li>
+  <li>Title</li>
+  <li>Description</li>
+  <li>Button</li>
+</ul>
+
+La construccion del componente es la siguiente:
+
+```code
+function Card({ article, navigation }) {
+  return (
+    <View style={styles.card}>
+      <Image
+        source={
+          article. urlToImage === null
+            ? "./assets/noimage.jpg"
+            : { uri: article.urlToImage }
+        }
+        style={styles.image}
+      />
+      <View style={styles.cardContent}>
+        <Text style={styles.title}>{article.title}</Text>
+        <Text style={styles.description}>{article.description}</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("Details", { article })}
+        >
+          <Text style={styles.buttonText}>Ver Detalles</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+}
+```
+
+En el json hay algunos articulos que no contienen imagen, para esto hice una ternaria para que en el caso de que la imagen tenga un valor null, en cambio ponga una imagen descargada de internet con una leyenda que dice <strong>no photo</strong>
+
+Tambien recibe esta Card el objeto navigation para poder ir a la pantalla de Detalles, y asu vez le mandamos el objeto article.
