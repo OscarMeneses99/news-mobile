@@ -176,4 +176,52 @@ function Card({ article, navigation }) {
 
 En el json hay algunos articulos que no contienen imagen, para esto hice una ternaria para que en el caso de que la imagen tenga un valor null, en cambio ponga una imagen descargada de internet con una leyenda que dice <strong>no photo</strong>
 
-Tambien recibe esta Card el objeto navigation para poder ir a la pantalla de Detalles, y asu vez le mandamos el objeto article.
+Tambien recibe esta Card el objeto navigation para poder ir a la pantalla de Detalles, y a su vez le mandamos el objeto article.
+
+## Renderizar una Lista de Articulos
+
+Primero obtenemos la lista de articulos desde la API de la siguiente manera.
+
+```code
+  const [data, setData] = useState({});
+  useEffect(() => {
+    getNews()
+      .then((response) => setData(response))
+      .catch((error) => console.error(error));
+  }, []);
+
+  const { articles } = data;
+```
+
+
+Para que el rendimiento de la aplicación sea bueno, se usara FlatList ya que nos permite renderizar una lista con scroll.
+
+Queda de la siguiente manera:
+
+```code
+    <View style={styles.container}>
+      <FlatList
+        data={articles}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
+        showsVerticalScrollIndicator={false}
+      />
+    </View>
+```
+
+Donde renderItem es cada una de las Cards
+
+```code
+ const renderItem = ({ item }) => (
+    <View style={styles.item}>
+      <Card
+        article={item}
+        navigation={navigation}
+      />
+    </View>
+  );
+```
+
+### Pantalla de detalles
+
+Por ultimo 
