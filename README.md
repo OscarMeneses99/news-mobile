@@ -298,3 +298,27 @@ Expo nos permite hacer una pre-Build de nuestra app para iOS/Android. Ejecute el
 ```bash
 npx expo prebuild
 ```
+
+Con esto se generarán 2 carpetas en la raíz de nuestro proyecto llamadas ios y android.
+
+## Creación del APK
+
+Para generar el APK, puede abrir el proyecto en Android Studio.
+
+Luego, abra la terminal y navegue al directorio llamado android:
+
+```bash
+cd android
+```
+
+Allí ejecute el siguiente comando:
+
+```bash
+./gradlew assembleRelease
+```
+
+Comenzará la creación de nuestro APK.
+
+Finalmente, encontrará el APK en la ruta: <strong> android/app/build/outputs/apk/release/app-release.apk </strong>
+
+Por último, puede copiar y pegar este archivo en su teléfono con sistema operativo Android. Asegúrese de que puede instalar aplicaciones de terceros.
