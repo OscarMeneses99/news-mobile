@@ -12,6 +12,18 @@ npx create-expo-app
 
 Segun las instrucciones, se debera llamar al proyecto <strong>news-mobile</strong>
 
+## Ejecutar app
+
+Ejecute el siguiente comando en su terminal:
+
+```bash
+npx expo start
+```
+
+Para poder visualizar los cambios en tiempo real de nuestra aplicación es recomendable descargar en su tienda de aplicaciones PlayStore/AppStore la aplicación llamada Expo Go
+
+Abra su camara y capture el codigo QR que aparece en la terminal cuando el proyecto este ejecutandose.
+
 ## Añadir un Router a la aplicación
 
 Utilizaremos React Navigation, para mas información visite la documentación: https://reactnavigation.org/docs/getting-started/
@@ -138,6 +150,7 @@ export async function getNews() {
 Cree un archivo Card.jsx en la carpeta components.
 
 Esta recibira como props los <strong>articles</strong> de todas las noticias, la cual debera renderizar:
+
 <ul>
   <li>Image</li>
   <li>Title</li>
@@ -193,7 +206,6 @@ Primero obtenemos la lista de articulos desde la API de la siguiente manera.
   const { articles } = data;
 ```
 
-
 Para que el rendimiento de la aplicación sea bueno, se usara FlatList ya que nos permite renderizar una lista con scroll.
 
 Queda de la siguiente manera:
@@ -224,4 +236,66 @@ Donde renderItem es cada una de las Cards
 
 ### Pantalla de detalles
 
-Por ultimo 
+Por ultimo en la pantalla de detalles nos hace falta presentar:
+
+<ul>
+  <li>Image</li>
+  <li>Title</li>
+  <li>Source</li>
+  <li>Date</li>
+  <li>Content</li>
+  <li>Link</li>
+</ul>
+
+En la response de la api, la propiedad content no presenta toda la información en texto, por lo que se le agregara un link que lleve a la web para poder visualizar la noticia completa.
+
+Recuerde que recibimos como prop en la ruta de detalles el objeto article por lo tanto podemos recuperarlo de la siguiente manera:
+
+```code
+const Details = ({ route }) => {
+  const { article } = route.params;
+}
+```
+
+En esta parte cree una función que nos permita abrir la url en el navegador del dispositivo para visitar fuente de la noticia.
+
+```code
+  const openUrl = () => {
+    Linking.openURL(url);
+  };
+```
+
+Se puede dar formato a la fecha de publicación de la siguiente forma:
+
+```code
+const formatedDate = new Date(publishedAt).toLocaleDateString();
+```
+
+Por ultimo presentamos la siguiente información de la siguiente forma:
+
+```code
+    <View style={styles.conteiner}>
+      <Text style={styles.title}>{title}</Text>
+      <Image
+        source={{ uri: urlToImage }}
+        style={styles.image}
+      />
+      <Text style={styles.date}>
+        {author} | {formatedDate}
+      </Text>
+      <Text style={styles.content}>{content}</Text>
+      <Button
+        title="Read more"
+        onPress={openUrl}
+      />
+    </View>
+```
+
+### pre-Build
+
+Expo nos permite hacer una pre-Build de nuestra app para ios/android ejecute el siguiente comando:
+
+```bash
+
+```
+
