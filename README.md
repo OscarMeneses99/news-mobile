@@ -76,3 +76,61 @@ function App() {
   );
 }
 ```
+
+## Obtener token de la API
+
+Cree una cuenta en https://newsapi.org/ el cual le otorgara un token para poder usar el servicio.
+
+Por motivos de seguridad y buenas practicas comience guardando este token en una variable de entorno.
+
+En la ruta raiz del proyecto cree un archivo <strong>.env</strong> y guarde el token de la siguiente forma:
+
+```code
+NEWS_API_KEY=your_api_key
+```
+
+## Variables de entorno
+
+Para acceder a las variables de entorno se debera instalar dotenv y expo-constants de la siguiente forma:
+
+```bash
+npm install dotenv expo-constants
+```
+
+Cree un archivo en la raiz del proyecto llamado <strong>app.config.js</strong>
+
+Dentro debera incluir esta configuración:
+
+```code
+import "dotenv/config";
+
+export default ({ config }) => ({
+  ...config,
+  extra: {
+    NEWS_API_KEY: process.env.NEWS_API_KEY,
+  },
+});
+```
+
+Por ultimo asegurese de agregar el .env en el archivo .gitignore para no subir el token a algun repositorio de github.
+
+## Consumo de la API
+
+Cree una carpeta llamada <strong>services</strong> con el archivo <strong>api.js</strong>
+
+En la siguiente funcion hacemos una llamada a una url con el token para obtener las noticias:
+
+```code
+import Constants from "expo-constants";
+const NEWS_API_KEY = Constants.expoConfig.extra.NEWS_API_KEY;
+
+const API_URL = `https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=${NEWS_API_KEY}`;
+
+export async function getNews() {
+  const response = await fetch(API_URL);
+  return await response.json();
+}
+```
+
+
+
