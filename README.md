@@ -42,7 +42,7 @@ npx expo install react-native-screens react-native-safe-area-context
 
 En el punto de entrada de nuestra aplicación, que es App.js, usaremos el NavigationContainer:
 
-```react
+```js
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -63,13 +63,13 @@ npm install @react-navigation/native-stack
 
 Podemos declarar una constante:
 
-```code
+```js
 const Stack = createNativeStackNavigator();
 ```
 
 Esto devuelve 2 objetos que son el Navigation y Screen, con ellos podemos declarar las rutas de nuestra aplicación y el componente a renderizar de la siguiente forma:
 
-```code
+```js
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -98,7 +98,7 @@ Por motivos de seguridad y buenas prácticas, comience guardando este token en u
 
 En la ruta raíz del proyecto, cree un archivo .env y guarde el token de la siguiente forma:
 
-```code
+```js
 NEWS_API_KEY=your_api_key
 ```
 
@@ -114,7 +114,7 @@ Cree un archivo en la raíz del proyecto llamado app.config.js.
 
 Dentro deberá incluir esta configuración:
 
-```code
+```js
 import "dotenv/config";
 
 export default ({ config }) => ({
@@ -133,7 +133,7 @@ Cree una carpeta llamada services con el archivo api.js
 
 En la siguiente función hacemos una llamada a una URL con el token para obtener las noticias:
 
-```code
+```js
 import Constants from "expo-constants";
 const NEWS_API_KEY = Constants.expoConfig.extra.NEWS_API_KEY;
 
@@ -160,7 +160,7 @@ Este recibirá como props los articles de todas las noticias, la cual deberá re
 
 La construcción del componente es la siguiente:
 
-```code
+```js
 function Card({ article, navigation }) {
   return (
     <View style={styles.card}>
@@ -195,7 +195,7 @@ También recibe esta Card el objeto navigation para poder ir a la pantalla de De
 
 Primero obtenemos la lista de artículos desde la API de la siguiente manera.
 
-```code
+```js
   const [data, setData] = useState({});
   useEffect(() => {
     getNews()
@@ -210,7 +210,7 @@ Para que el rendimiento de la aplicación sea bueno, se usará FlatList ya que n
 
 Queda de la siguiente manera:
 
-```code
+```js
     <View style={styles.container}>
       <FlatList
         data={articles}
@@ -223,7 +223,7 @@ Queda de la siguiente manera:
 
 Donde renderItem es cada una de las Cards
 
-```code
+```js
  const renderItem = ({ item }) => (
     <View style={styles.item}>
       <Card
@@ -251,7 +251,7 @@ En la respuesta de la API, la propiedad content no presenta toda la información
 
 Recuerde que recibimos como prop en la ruta de detalles el objeto article por lo tanto podemos recuperarlo de la siguiente manera:
 
-```code
+```js
 const Details = ({ route }) => {
   const { article } = route.params;
 }
@@ -259,7 +259,7 @@ const Details = ({ route }) => {
 
 En esta parte cree una función que nos permita abrir la URL en el navegador del dispositivo para visitar la fuente de la noticia.
 
-```code
+```js
   const openUrl = () => {
     Linking.openURL(url);
   };
@@ -267,13 +267,13 @@ En esta parte cree una función que nos permita abrir la URL en el navegador del
 
 Se puede dar formato a la fecha de publicación de la siguiente forma:
 
-```code
+```js
 const formatedDate = new Date(publishedAt).toLocaleDateString();
 ```
 
 Por último, presentamos la siguiente información de la siguiente forma:
 
-```code
+```js
     <View style={styles.conteiner}>
       <Text style={styles.title}>{title}</Text>
       <Image
