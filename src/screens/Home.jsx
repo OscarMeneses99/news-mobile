@@ -1,49 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
-import Card from "../components/Card";
-import { getNews } from "../services/api";
+import React from "react";
+import { View } from "react-native";
+import useFetch from "../hooks/useFetch.js";
+import Loading from "../components/Loading.jsx";
+import ListOfNews from "../components/ListOfNews.jsx";
+import Error from "../components/Error.jsx";
 
 function Home({ navigation }) {
-  const [data, setData] = useState({});
-  useEffect(() => {
-    getNews()
-      .then((response) => setData(response))
-      .catch((error) => console.error(error));
-  }, []);
-
+  const { data, loading, error } = useFetch();
   const { articles } = data;
-
-  const renderItem = ({ item }) => (
-    <View style={styles.item}>
-      <Card
-        article={item}
-        navigation={navigation}
-      />
-    </View>
-  );
-
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={articles}
-        renderItem={renderItem}
-        keyExtractor={(item, index) => index.toString()}
-        showsVerticalScrollIndicator={false}
-      />
+    <View>
+      {loading ? (
+        <Loading />
+      ) : (
+        <ListOfNews
+          articles={articles}
+          navigation={navigation}
+        />
+      )}
+      {error && <Error error={error} />}
     </View>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 16,
-    marginTop: 10,
-  },
-  item: {
-    marginBottom: 10,
-  },
-});
 
 export default Home;
