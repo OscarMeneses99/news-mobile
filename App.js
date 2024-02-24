@@ -1,6 +1,7 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NewsProvider } from "./src/context/Context";
 
 import Home from "./src/screens/Home";
 import Details from "./src/screens/Details";
@@ -43,20 +44,22 @@ const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={options.home}
-        />
-        <Stack.Screen
-          name="Details"
-          component={Details}
-          options={options.details}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <NewsProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={options.home}
+          />
+          <Stack.Screen
+            name="Details"
+            component={Details}
+            options={options.details}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </NewsProvider>
   );
 }
 
