@@ -1,17 +1,11 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import Image from "./Image";
 
 function Card({ article, navigation }) {
   return (
     <View style={styles.card}>
-      <Image
-        source={
-          article. urlToImage === null
-            ? "./assets/noimage.jpg"
-            : { uri: article.urlToImage }
-        }
-        style={styles.image}
-      />
+      <Image article={article} />
       <View style={styles.cardContent}>
         <Text style={styles.title}>{article.title}</Text>
         <Text style={styles.description}>{article.description}</Text>
@@ -19,7 +13,7 @@ function Card({ article, navigation }) {
           style={styles.button}
           onPress={() => navigation.navigate("Details", { article })}
         >
-          <Text style={styles.buttonText}>Ver Detalles</Text>
+          <Text style={styles.buttonText}>Show</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -43,12 +37,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.23,
     shadowRadius: 2.62,
     elevation: 4,
-  },
-  image: {
-    width: "100%",
-    height: 200,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
   },
   cardContent: {
     padding: 10,
