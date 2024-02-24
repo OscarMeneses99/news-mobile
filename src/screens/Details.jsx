@@ -1,5 +1,6 @@
 import React from "react";
-import { View, Text, Image, Button, Linking, StyleSheet } from "react-native";
+import { View, Text, Button, Linking, StyleSheet } from "react-native";
+import Image from "../components/Image";
 
 const Details = ({ route }) => {
   const { article } = route.params;
@@ -14,10 +15,7 @@ const Details = ({ route }) => {
   return (
     <View style={styles.conteiner}>
       <Text style={styles.title}>{title}</Text>
-      <Image
-        source={{ uri: urlToImage }}
-        style={styles.image}
-      />
+      <Image article={article} />
       <Text style={styles.date}>
         {author} | {formatedDate}
       </Text>
@@ -55,4 +53,3 @@ const styles = StyleSheet.create({
 });
 
 export default Details;
-
