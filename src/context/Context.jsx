@@ -29,8 +29,6 @@ export const NewsProvider = ({ children }) => {
     fetchData();
   }, []);
 
-  console.log(data);
-
   return (
     <NewsContext.Provider
       value={{
